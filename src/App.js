@@ -77,7 +77,7 @@ class App3 extends Component {
       <div  className="app3">
         <h1>Comments</h1>
         <div className="commentsSection">
-          <TodoList items={this.state.items} />
+          <AddComment items={this.state.items} />
         </div>
         <form onSubmit={this.handleSubmit}>
           <textarea onChange={this.handleChange} value={this.state.text} />
@@ -104,7 +104,7 @@ class App3 extends Component {
   }
 }
 
-class TodoList extends React.Component {
+class AddComment extends React.Component {
   render() {
     return (
       <ul>
@@ -117,3 +117,8 @@ class TodoList extends React.Component {
 }
 
 export default App;
+
+// note to self
+// use map on display values in response.body.abilities.[].ability.name
+// use preloader and try catch if no pokemon available
+// file handling... use the name/id of the pokemon to name the text file...
