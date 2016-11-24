@@ -1,3 +1,15 @@
+Pokemon Commentator with the use of ReactJS and Pokemon API
+
+notes:</br>
+-searches pokemon names/id (use try catch)</br>
+-after selecting pokemon => able to see the stats and hope to render sprites as well</br>
+-can comment on that pokemon (file handling (read & write))</br>
+
+
+______________________________________________________________________________________________</3
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
