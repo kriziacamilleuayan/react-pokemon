@@ -5,5 +5,10 @@ import './index.css';
 
 ReactDOM.render(
   <App />,
-  document.getElementById('root')
+  document.getElementById('panel1')
+);
+
+ReactDOM.render(
+  <panelTwo />,
+  document.getElementById('panel2')
 );

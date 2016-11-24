@@ -22,3 +22,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.App, .app2{
+  width: 33.33%;
+}
+
+.flex{
+  display: flex;
+}
