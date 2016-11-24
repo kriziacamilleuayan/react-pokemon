@@ -204,7 +204,8 @@ class App extends Component {
     var url = "https://pokeapi.co/api/v2/pokemon/"+this.state.value;
     Request.get(url).then((response) => {
       this.setState({
-        stat: response.body
+        stat: response.body,
+        name: response.body.name
       });
     });
     // console.log(this.state.value);
@@ -225,7 +226,7 @@ class App extends Component {
           </form>
         </div>
         <div className="app2">
-          <p value={this.state.value}></p>
+          <p>{this.state.name}</p>
         </div>
       </div>
 
