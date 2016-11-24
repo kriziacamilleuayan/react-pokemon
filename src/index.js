@@ -7,8 +7,3 @@ ReactDOM.render(
   <App />,
   document.getElementById('panel1')
 );
-
-ReactDOM.render(
-  <panelTwo />,
-  document.getElementById('panel2')
-);
