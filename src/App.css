@@ -1,4 +1,4 @@
-.App, .app2, .app3 {
+.App, .app2 {
   text-align: center;
 }
 
@@ -41,4 +41,18 @@ small{
   width: 99%;
   overflow-y: auto;
   border: 1px solid black;
+}
+
+.container{
+  padding: 10%;
+}
+
+.textarea{
+  margin-top: 10px;
+  width: 100%;
+}
+
+.app2{
+  height: 100%;
+  overflow-y: auto;
 }

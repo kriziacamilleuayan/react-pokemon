@@ -39,6 +39,9 @@ class App extends Component {
         picFront: response.body.sprites.front_default,
         picBack: response.body.sprites.back_default,
         picShiny: response.body.sprites.front_shiny,
+        types: response.body.types,
+        moves: response.body.moves,
+        statName: response.body.stats
       });
     });
     // console.log(this.state.value);
@@ -54,24 +57,43 @@ class App extends Component {
     return (
       <div className="flex">
           <div className="App">
-          <h1>Search Pokemon</h1>
-          <form onSubmit={this.handleSubmit}>
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              <input type="submit" value="Submit" />
-          </form>
+            <div className="container">
+              <h1>Search Pokemon</h1>
+              <form onSubmit={this.handleSubmit}>
+                  <input type="text" value={this.state.value} onChange={this.handleChange} />
+                  <input type="submit" value="Submit" />
+              </form>
+            </div>
         </div>
         <div className="app2">
-          <h1><small>{this.state.order} </small>{this.state.name}</h1>
-          <img alt={this.state.name} src={this.state.picFront}/>
-          <img alt={this.state.name} src={this.state.picBack}/>
-          <img alt={this.state.name} src={this.state.picShiny}/>
-          <p>Height: {this.state.height}</p>
-          <p>Weight: {this.state.weight}</p>
-          <p>
-            list of abilities here: 
-             {this.state.abilities && this.state.abilities.map((abilityObject) => 
-        abilityObject.ability.name).join(', ')}
-          </p>
+          <div className="container">
+            <h1><small>{this.state.order} </small>{this.state.name}</h1>
+            <hr/>
+            <img alt={this.state.name} src={this.state.picFront}/>
+            <img alt={this.state.name} src={this.state.picBack}/>
+            <img alt={this.state.name} src={this.state.picShiny}/>
+                        <hr/>
+            <p><b>Type/s</b></p>
+            <p>
+               {this.state.types && this.state.types.map((typesObject) => 
+          typesObject.type.name).join(', ')}
+            </p>
+            <hr/>
+            <p>Height: {this.state.height}</p>
+            <p>Weight: {this.state.weight}</p>
+            <hr/>
+            <p><b>Abilities</b></p>
+            <p>
+               {this.state.abilities && this.state.abilities.map((abilityObject) => 
+          abilityObject.ability.name).join(', ')}
+            </p>
+            <hr/>
+            <p><b>Moves</b></p>
+            <p>
+               {this.state.moves && this.state.moves.map((movesObject) => 
+          movesObject.move.name).join(', ')}
+            </p>
+          </div>
         </div>
         <App3/>
       </div>
@@ -91,14 +113,16 @@ class App3 extends Component {
   render() {
     return (
       <div  className="app3">
-        <h1>Comments</h1>
-        <div className="commentsSection">
-          <AddComment items={this.state.items} />
+        <div className="container">
+          <h1>Comments</h1>
+          <div className="commentsSection">
+            <AddComment items={this.state.items} />
+          </div>
+          <form onSubmit={this.handleSubmit}>
+            <textarea className="textarea" onChange={this.handleChange} value={this.state.text} />
+            <button>Comment</button>
+          </form>
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <textarea onChange={this.handleChange} value={this.state.text} />
-          <button>Comment</button>
-        </form>
       </div>
     );
   }
@@ -123,11 +147,11 @@ class App3 extends Component {
 class AddComment extends React.Component {
   render() {
     return (
-      <ul>
+      <p>
         {this.props.items.map(item => (
           <p key={item.id}>{item.text}</p>
         ))}
-      </ul>
+      </p>
     );
   }
 }
