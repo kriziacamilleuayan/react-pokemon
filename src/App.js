@@ -37,7 +37,7 @@ handleSubmit(event) {
       weight: response.body.weight,
       abilities: response.body.abilities,   //di ko makuha aasdhjgsfaj
       name: response.body.name,
-      order: response.body.order,
+      order: response.body.id,
       picFront: response.body.sprites.front_default,
       picBack: response.body.sprites.back_default,
       picShiny: response.body.sprites.front_shiny,
