@@ -9,11 +9,13 @@ class App extends Component {
  constructor(props) {
     super(props);
     this.state = {
+      body: "",
       value: "",
       name: "",
       abilities: "",
       order: "",
-      pic: ""
+      weight: "",
+      height: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,13 +30,15 @@ class App extends Component {
     var url = "https://pokeapi.co/api/v2/pokemon/"+this.state.value;
     Request.get(url).then((response) => {
       this.setState({
-        abilities: response.body.abilities,
+        body: response.body,
+        height: response.body.height,
+        weight: response.body.weight,
+        abilities: response.body.abilities,   //di ko makuha aasdhjgsfaj
         name: response.body.name,
         order: response.body.order,
         picFront: response.body.sprites.front_default,
         picBack: response.body.sprites.back_default,
-        picShiny: response.body.sprites.front_shiny
-
+        picShiny: response.body.sprites.front_shiny,
       });
     });
     // console.log(this.state.value);
@@ -42,13 +46,18 @@ class App extends Component {
   }
 
   render() {
+    // var ib = this.state.abilities;
+    // var ab = [ib].map((abb) => {
+    //   return <p>{ib + abb }</p>
+    // });
+
     return (
       <div className="flex">
           <div className="App">
           <h1>Search Pokemon</h1>
           <form onSubmit={this.handleSubmit}>
               <input type="text" value={this.state.value} onChange={this.handleChange} />
-            <input type="submit" value="Submit" />
+              <input type="submit" value="Submit" />
           </form>
         </div>
         <div className="app2">
@@ -56,6 +65,13 @@ class App extends Component {
           <img alt={this.state.name} src={this.state.picFront}/>
           <img alt={this.state.name} src={this.state.picBack}/>
           <img alt={this.state.name} src={this.state.picShiny}/>
+          <p>Height: {this.state.height}</p>
+          <p>Weight: {this.state.weight}</p>
+          <p>
+            list of abilities here: 
+             {this.state.abilities && this.state.abilities.map((abilityObject) => 
+        abilityObject.ability.name).join(', ')}
+          </p>
         </div>
         <App3/>
       </div>
