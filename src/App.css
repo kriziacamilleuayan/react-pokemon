@@ -1,3 +1,17 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  background-image: url(http://www.ndadak.com/i/pikachu-pokeball-desktop-wallpapers.jpg);
+}
+
+p, h1, h2, h3, h4, h5, small, span {
+  color: #424242;
+}
+
+/*#panel1{
+  background-color: pink;
+}*/
+
 .App, .app2 {
   text-align: center;
 }
@@ -23,8 +37,14 @@
   to { transform: rotate(360deg); }
 }
 
+.App{
+  width: 25%;
+  min-height: 100%;
+}
+
 .App, .app2, .app3{
   width: 33.33%;
+  min-height: 100%;
 }
 
 .flex{
@@ -33,26 +53,73 @@
 
 small{
   font-size: 50%;
-  color: lightgray;
+  color: #848181;
 }
 
 .commentsSection{
   height: 300px;
   width: 99%;
   overflow-y: auto;
-  border: 1px solid black;
+  border: 1px solid #6798e6;
 }
 
-.container{
-  padding: 10%;
+textarea{
+  width: 98%;
+  margin-top: 20px;
 }
 
-.textarea{
-  margin-top: 10px;
-  width: 100%;
-}
-
-.app2{
+.container-fluid{
+  margin: 0 auto;
   height: 100%;
-  overflow-y: auto;
+  width: 90%;
+}
+
+.search{
+  margin-top: 60%;
+}
+
+#panel1{
+  height: 100%;
+}
+
+hr{
+  border: 1px solid #fff;
+}
+
+.commentsSection{
+  background-color: white;
+  padding: 1%;
+}
+
+.btn{
+  margin-top: 10px;
+  padding: 3% 10%;
+  border-radius: 5px;
+  background-color: #123163;
+  color: white;
+  border: 2px solid transparent;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn:hover{
+  color: #123163;
+  background-color: transparent;
+  border: 2px solid #123163;
+  -webkit-transition: 1s;
+    transition: 1s;
+}
+
+.textbux, .textarea{
+  line-height: 1.5rem;
+  font-size: 20px;
+}
+
+.itemComment{
+  padding: 0 1%;
+  border-bottom: 1px solid lightgray; 
+}
+
+.pokeName{
+  font-size: 60px;
 }
