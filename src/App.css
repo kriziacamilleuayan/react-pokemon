@@ -113,6 +113,8 @@ hr{
 .textbux, .textarea{
   line-height: 1.5rem;
   font-size: 20px;
+  border-radius: 2px;
+  border: none;
 }
 
 .itemComment{
