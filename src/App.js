@@ -69,6 +69,9 @@ handleSubmit(event) {
             </div>
           </div>
         </div>
+
+        {this.state.order ? 
+          <div className="flex labas">
         <App2 
         pokeOrder={this.state.order}
         pokeName={this.state.name}
@@ -82,6 +85,9 @@ handleSubmit(event) {
         pokeMoves={this.state.moves}
         />
         <App3 pokeProp={this.state.name}/>
+        </div>
+        : <p>nothing to display / no such pokemon</p>
+      }
       </div>
 
       );
@@ -92,7 +98,7 @@ handleSubmit(event) {
 class App2 extends Component{
  render (){
   return (
-            <div className="app2">
+          <div className="app2">
           <div className="col-sm-4">
             <div className="container-fluid">
               <h1 className="pokeName"><small >{this.props.pokeOrder} </small>{this.props.pokeName}</h1>
@@ -192,6 +198,25 @@ class App3 extends Component {
   }
 
 class AddComment extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+        body: [],
+        author: '',
+        comment: ''
+      };
+    }
+
+  readComment(){
+      var url = "http://localhost:3000/api/comments";
+      Request.get(url).then((response) => {
+        this.setState({
+            body: response
+        });
+      });
+  }
+
+
   render() {
     return (
       <div>
@@ -207,6 +232,7 @@ class AddComment extends React.Component {
 
 export default App;
 
+//items = comments
 // note to self
 // use map on display values in response.body.abilities.[].ability.name//
 //kapag walang laman, wala muna lalabas sa app2, while rendering naman use preloader... same din sa app3
