@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-//var Preload = require('react-preload').Preload; //not wurking
-// import Autosuggest from 'react-autosuggest';
-// var ImagePreloaderComponent = require('react-image-preloader'); //ihope this works
-
-// mamaya ko na po ayusin yung codes T_T
+import App1 from './Components/App1.js';
+import App2 from './Components/App2.js';
+import App3 from './Components/App3.js';
 
 import Request from 'superagent';
 
@@ -19,11 +16,18 @@ class App extends Component {
     abilities: "",
     order: "",
     weight: "",
-    height: ""
+    height: "",
+    commentBody: [],
+    text: "",
+    author: "",
+    id: "",
+    items: []
   };
 
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
+  this.handleCommentChange = this.handleCommentChange.bind(this);
+  this.handleComment = this.handleComment.bind(this);
 }
 
 handleChange(event) {
@@ -32,6 +36,7 @@ handleChange(event) {
 
 handleSubmit(event) {
   var url = "https://pokeapi.co/api/v2/pokemon/"+this.state.value;
+  var urlComment = "http://localhost:3000/api/comments";
   Request.get(url).then((response) => {
     this.setState({
       body: response.body,
@@ -48,43 +53,100 @@ handleSubmit(event) {
       statName: response.body.stats
     });
   });
+
+  Request.get(urlComment).then((response) => {
+    this.setState({
+        commentBody: response,
+        items: []
+    });
+  });
+
+    
+
+      // if (this.state.value === this.state.name){
+      //   console.log("yeah")
+      // }
+
+      // else{
+      //   alert(this.state.value + " is not in the pokedex")
+      // }
+
     // console.log(this.state.value);
     event.preventDefault();
   }
 
+
+  handleCommentChange(e) {
+    this.setState({text: e.target.value});
+  }
+
+  handleComment(e) {
+    e.preventDefault();
+    var callback = console.log('lol');
+    Request.post('http://localhost:3000/api/comments')
+           .send({
+            idComment: this.state.id,
+            author: this.state.name,
+            text: this.state.text
+          })
+           // .end(console.log("comment" + this.state.text))
+           .end(callback)
+           this.ReturnComment();
+
+    var newItem = {
+      id: Date.now(),
+      author: this.state.name,
+      text: this.state.text
+    };
+    this.setState((prevState) => ({
+      items: prevState.items.concat(newItem),
+      text: ""
+    }));
+  }
+
+
+
+  ReturnComment(){
+    var urlComment = "http://localhost:3000/api/comments";
+    // var comcom = .append(this.state.text);
+    Request.get(urlComment)
+            .then((i) => {this.setState({commentBody: i})});
+  }
+
+
   render() {
     return (
       <div className="row flex">
-        <div className="App">
-          <div className="col-sm-4">
-            <div className="container-fluid">
-              <div className="search">
-                <h1 className="searchPokemon">Search Pokemon</h1>
-                <form onSubmit={this.handleSubmit}>
-                  <input type="text" className="textbux" value={this.state.value} onChange={this.handleChange} />
-                  <br/>
-                  <input type="submit" value="Submit" className="btn btn-default"/>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+        
+        <App1
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+          value={this.state.value}
+        />
 
         {this.state.order ? 
           <div className="flex labas">
         <App2 
-        pokeOrder={this.state.order}
-        pokeName={this.state.name}
-        pokePicFront={this.state.picFront}
-        pokePicBack={this.state.picBack}
-        pokePicShiny={this.state.picShiny}
-        pokeTypes={this.state.types}
-        pokeHeight={this.state.height}
-        pokeWeight={this.state.weight}
-        pokeAbilities={this.state.abilities}
-        pokeMoves={this.state.moves}
+          pokeOrder={this.state.order}
+          pokeName={this.state.name}
+          pokePicFront={this.state.picFront}
+          pokePicBack={this.state.picBack}
+          pokePicShiny={this.state.picShiny}
+          pokeTypes={this.state.types}
+          pokeHeight={this.state.height}
+          pokeWeight={this.state.weight}
+          pokeAbilities={this.state.abilities}
+          pokeMoves={this.state.moves}
         />
-        <App3 pokeProp={this.state.name}/>
+        <App3
+          pokeName={this.state.name}
+          text={this.state.text}
+          commentBody={this.state.commentBody}
+          onChange={this.handleCommentChange}
+          handleComment={this.handleComment}
+          id={this.state.id}
+          items={this.state.items}
+        />
         </div>
         : <p>nothing to display / no such pokemon</p>
       }
@@ -93,142 +155,6 @@ handleSubmit(event) {
       );
   }
 };
-
-
-class App2 extends Component{
- render (){
-  return (
-          <div className="app2">
-          <div className="col-sm-4">
-            <div className="container-fluid">
-              <h1 className="pokeName"><small >{this.props.pokeOrder} </small>{this.props.pokeName}</h1>
-              <hr/>
-              <img alt={this.props.pokeName} src={this.props.pokePicFront}/>
-              <img alt={this.props.pokeName} src={this.props.pokePicBack}/>
-              <img alt={this.props.pokeName} src={this.props.pokePicShiny}/>
-              <hr/>
-              <p><b>Type/s</b></p>
-              <p>
-              {this.props.pokeTypes && this.props.pokeTypes.map((typesObject) => 
-                typesObject.type.name).join(', ')}
-              </p>
-              <hr/>
-              <p><b>Height</b>: {this.props.pokeHeight} ft</p>
-              <p><b>Weight</b>: {this.props.pokeWeight} kg</p>
-              <hr/>
-              <p><b>Abilities</b></p>
-              <p>
-              {this.props.pokeAbilities && this.props.pokeAbilities.map((abilityObject) => 
-                abilityObject.ability.name).join(', ')}
-              </p>
-              <hr/>
-              <p><b>Moves</b></p>
-              <p>
-              {this.props.pokeMoves && this.props.pokeMoves.map((movesObject) => 
-                movesObject.move.name).join(', ')}
-              </p>
-            </div>
-          </div>
-        </div>
-    )
- }
-}
-
-class App3 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [],
-      text: "",
-      author: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({text: e.target.value});
-  }
-
-  handleSubmit(e) {
-      
-      var callback = console.log('lol');
-      Request.post('http://localhost:3000/api/comments')
-             .send({
-              author: this.props.pokeProp,
-              text: this.state.text
-            })
-             .end(callback);
-    //
-    // var commentUrl = "http://localhost:3000/api/comments";
-    // Request.post(commentUrl) => {
-
-    // };
-    //
-   e.preventDefault(); 
-    var newItem = {
-      id: Date.now(),
-      author: this.state.name,
-      text: this.state.text
-    };
-    this.setState((prevState) => ({
-      items: prevState.items.concat(newItem),
-      text: ''
-    }));
-  }
-
-  render() {
-    return (
-      <div  className="app3">
-        <div className="col-sm-4">
-          <div className="container-fluid">
-            <h1>Comments</h1>
-            <div className="commentsSection">
-            <AddComment items={this.state.items} />
-            </div>
-            <form onSubmit={this.handleSubmit}>
-              <textarea className="textarea" onChange={this.handleChange} value={this.state.text} />
-              <button className="btn btn-default">Comment</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      );
-    }
-  }
-
-class AddComment extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-        body: [],
-        author: '',
-        comment: ''
-      };
-    }
-
-  readComment(){
-      var url = "http://localhost:3000/api/comments";
-      Request.get(url).then((response) => {
-        this.setState({
-            body: response
-        });
-      });
-  }
-
-
-  render() {
-    return (
-      <div>
-      {this.props.items.map(item => (
-        <p className="itemComment"  key={item.id}>{item.text}</p>
-        ))}
-      </div>
-      );
-    }
-  }
-
-
 
 export default App;
 
