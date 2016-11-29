@@ -98,10 +98,13 @@ handleSubmit(event) {
       author: this.state.name,
       text: this.state.text
     };
-    this.setState((prevState) => ({
-      items: prevState.items.concat(newItem),
+    // this.setState((prevState) => ({
+    //   items: prevState.items.concat(newItem),
+    //   text: ""
+    // }));
+    this.setState({
       text: ""
-    }));
+    });
   }
 
 
