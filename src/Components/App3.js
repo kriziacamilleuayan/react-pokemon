@@ -4,19 +4,33 @@ export default React.createClass ({
 
   render() {
     return (
+
       <div>
-        <h1>Comments</h1>
-        <h3>on {this.props.pokeName}</h3>
+        <h1>Comments <small>on {this.props.pokeName}</small></h1>
         <div className="commentsSection">
           <div>
-            <div>{this.props.commentBody.body.filter((objComment) => {return objComment.author === this.props.pokeName}).map((i) => {return <p className="itemComment">{i.text}</p>})}</div>
-                {this.props.items.map(item => (
-                  <p key={item.id} className="itemComment">{item.text}</p>
+            <div>
+                {this.props.commentBody.body
+                  .filter((objComment) => {return objComment.author === this.props.pokeName})
+                  .map((i) => {return (
+                                <div className="itemComment">
+                                  <p className="no-margin">"{i.text}"</p>
+                                  <p className="right">-{i.id}</p>
+                                </div>)
+                              })
+                }
+                 {this.props.items.map(item => (
+                    <div className="itemComment">
+                      <p className="no-margin" key={item.id}>"{item.text}"</p>
+                      <p className="right">-{item.id}</p>
+                    </div>
                 ))}
+            </div>
+                 
           </div>
         </div>
         <form onSubmit={this.props.handleComment}>
-          <textarea className="textarea" onChange={this.props.onChange} value={this.props.text}/>
+          <textarea className="textarea" onChange={this.props.onChange} value={this.props.text} rows="4"/>
           <button className="btn btn-default">Comment</button>
         </form>
       </div>

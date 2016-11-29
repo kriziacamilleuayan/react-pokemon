@@ -8,14 +8,14 @@ export default React.createClass({
             <div className="container-fluid">
               <h1 className="pokeName"><small >{this.props.pokeOrder} </small>{this.props.pokeName}</h1>
               <hr/>
-              <img alt={this.props.pokeName} src={this.props.pokePicFront}/>
-              <img alt={this.props.pokeName} src={this.props.pokePicBack}/>
-              <img alt={this.props.pokeName} src={this.props.pokePicShiny}/>
+              <img alt={this.props.pokePicFront} src={this.props.pokePicFront}/>
+              <img alt={this.props.pokePicBack} src={this.props.pokePicBack}/>
+              <img alt={this.props.pokePicShiny} src={this.props.pokePicShiny}/>
               <hr/>
               <p><b>Type/s</b></p>
               <p>
-              {this.props.pokeTypes && this.props.pokeTypes.map((typesObject) => 
-                typesObject.type.name).join(', ')}
+                  {this.props.pokeTypes && this.props.pokeTypes.map((typesObject) => 
+                   typesObject.type.name).join(', ')}
               </p>
               <hr/>
               <p><b>Height</b>: {this.props.pokeHeight} ft</p>
@@ -23,14 +23,14 @@ export default React.createClass({
               <hr/>
               <p><b>Abilities</b></p>
               <p>
-              {this.props.pokeAbilities && this.props.pokeAbilities.map((abilityObject) => 
-                abilityObject.ability.name).join(', ')}
+                  {this.props.pokeAbilities && this.props.pokeAbilities.map((abilityObject) => 
+                    abilityObject.ability.name).join(', ')}
               </p>
               <hr/>
               <p><b>Moves</b></p>
               <p>
-              {this.props.pokeMoves && this.props.pokeMoves.map((movesObject) => 
-                movesObject.move.name).join(', ')}
+                  {this.props.pokeMoves && this.props.pokeMoves.map((movesObject) => 
+                    movesObject.move.name).join(', ')}
               </p>
             </div>
           </div>

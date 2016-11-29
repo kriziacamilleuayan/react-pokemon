@@ -37,21 +37,23 @@ handleChange(event) {
 handleSubmit(event) {
   var url = "https://pokeapi.co/api/v2/pokemon/"+this.state.value;
   var urlComment = "http://localhost:3000/api/comments";
-  Request.get(url).then((response) => {
-    this.setState({
-      body: response.body,
-      height: response.body.height,
-      weight: response.body.weight,
-      abilities: response.body.abilities,
-      name: response.body.name,
-      order: response.body.id,
-      picFront: response.body.sprites.front_default,
-      picBack: response.body.sprites.back_default,
-      picShiny: response.body.sprites.front_shiny,
-      types: response.body.types,
-      moves: response.body.moves,
-      statName: response.body.stats
-    });
+  Request.get(url).end((err, response) => {
+    {(err || !response.ok) ? alert(this.state.value + " is not in the pokedex")
+     : this.setState({
+        body: response.body,
+        height: response.body.height,
+        weight: response.body.weight,
+        abilities: response.body.abilities,
+        name: response.body.name,
+        order: response.body.id,
+        picFront: response.body.sprites.front_default,
+        picBack: response.body.sprites.back_default,
+        picShiny: response.body.sprites.front_shiny,
+        types: response.body.types,
+        moves: response.body.moves,
+        statName: response.body.stats
+      }); 
+    }
   });
 
   Request.get(urlComment).then((response) => {
@@ -60,8 +62,6 @@ handleSubmit(event) {
         items: []
     });
   });
-
-    
 
       // if (this.state.value === this.state.name){
       //   console.log("yeah")
@@ -144,7 +144,7 @@ handleSubmit(event) {
           commentBody={this.state.commentBody}
           onChange={this.handleCommentChange}
           handleComment={this.handleComment}
-          id={this.state.id}
+          idComment={this.state.id}
           items={this.state.items}
         />
         </div>
