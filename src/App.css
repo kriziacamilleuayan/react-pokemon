@@ -41,18 +41,22 @@ p, h1, h2, h3, h4, h5, small, span {
   width: 25%;
   min-height: 100%;
 }
-
+/*
 .App{
   width: 33.33%;
   min-height: 100%;
+}*/
+
+.app3{
+  width: 40%;
 }
 
-.app2, .app3{
-  width: 50%;
+.app2{
+  width: 60%;
 }
 
 .labas{
-  width: 67.77%;
+  width: 75%;
 }
 
 .flex{
@@ -83,7 +87,7 @@ textarea{
 }
 
 .search{
-  margin-top: 60%;
+  margin-top: 10%;
 }
 
 #panel1{
@@ -143,4 +147,21 @@ hr{
   font-size: 9px;
   font-style: italic;
   color: red;
+}
+
+.pikachu-gif{
+  width: 150px;
+  height: 150px;
+  margin: auto;
+}
+
+.pikachu2-gif{
+/*
+  width: 500px;
+  height: 500px;*/
+  margin: auto;
+}
+
+.margin-auto{
+  margin: auto;
 }

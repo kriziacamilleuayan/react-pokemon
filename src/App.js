@@ -21,7 +21,8 @@ class App extends Component {
     text: "",
     author: "",
     id: "",
-    items: []
+    items: [],
+    pictureSearch: "http://rs795.pbsrc.com/albums/yy232/PixKaruumi/Pokemon%20Pixels/Pikachu_Icon__free__by_Aminako.gif~c200"
   };
 
   this.handleChange = this.handleChange.bind(this);
@@ -51,7 +52,8 @@ handleSubmit(event) {
         picShiny: response.body.sprites.front_shiny,
         types: response.body.types,
         moves: response.body.moves,
-        statName: response.body.stats
+        statName: response.body.stats,
+        pictureSearch: response.body.sprites.front_default
       }); 
     }
   });
@@ -62,16 +64,6 @@ handleSubmit(event) {
         items: []
     });
   });
-
-      // if (this.state.value === this.state.name){
-      //   console.log("yeah")
-      // }
-
-      // else{
-      //   alert(this.state.value + " is not in the pokedex")
-      // }
-
-    // console.log(this.state.value);
     event.preventDefault();
   }
 
@@ -82,7 +74,7 @@ handleSubmit(event) {
 
   handleComment(e) {
     e.preventDefault();
-    var callback = console.log('lol');
+    // var callback = console.log('lol');
     Request.post('http://localhost:3000/api/comments')
            .send({
             idComment: this.state.id,
@@ -90,34 +82,31 @@ handleSubmit(event) {
             text: this.state.text
           })
            // .end(console.log("comment" + this.state.text))
-           .end(callback)
-           this.ReturnComment();
+           .then(() => this.ReturnComment(), this.setState({text: ""}))
+           // .end(this.setState({text: ""}))
+           // this.ReturnComment();
 
-    var newItem = {
-      id: Date.now(),
-      author: this.state.name,
-      text: this.state.text
-    };
-    // this.setState((prevState) => ({
-    //   items: prevState.items.concat(newItem),
-    //   text: ""
-    // }));
-    this.setState({
-      text: ""
-    });
+    // var newItem = {
+    //   id: Date.now(),
+    //   author: this.state.name,
+    //   text: this.state.text
+    // };
+
   }
 
 
 
   ReturnComment(){
     var urlComment = "http://localhost:3000/api/comments";
-    // var comcom = .append(this.state.text);
     Request.get(urlComment)
-            .then((i) => {this.setState({commentBody: i})});
+            .then((i) => this.setState({commentBody: i}));
   }
 
 
+
   render() {
+
+
     return (
       <div className="row flex">
         
@@ -125,6 +114,7 @@ handleSubmit(event) {
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
           value={this.state.value}
+          pictureSearch={this.state.pictureSearch}
         />
 
         {this.state.order ? 
@@ -151,7 +141,7 @@ handleSubmit(event) {
           items={this.state.items}
         />
         </div>
-        : <p>nothing to display / no such pokemon</p>
+        : <div></div>
       }
       </div>
 
@@ -161,10 +151,5 @@ handleSubmit(event) {
 
 export default App;
 
-//items = comments
-// note to self
-// use map on display values in response.body.abilities.[].ability.name//
-//kapag walang laman, wala muna lalabas sa app2, while rendering naman use preloader... same din sa app3
-// use preloader and try catch if no pokemon available
-// file handling... use the name/id of the pokemon to name the text file...
-//(e) = (event)
+//use preloader
+//

@@ -9,6 +9,7 @@ export default React.createClass({
           <div className="col-sm-4">
             <div className="container-fluid">
               <div className="search">
+                <img alt="pikachu" className="pikachu-gif" src={this.props.pictureSearch} />
                 <h1 className="searchPokemon">Search Pokemon</h1>
                 <form onSubmit={this.props.onSubmit}>
                   <input type="text" className="textbux" value={this.props.value} onChange={this.props.onChange} />

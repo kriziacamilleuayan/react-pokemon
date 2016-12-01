@@ -8,9 +8,20 @@ export default React.createClass({
             <div className="container-fluid">
               <h1 className="pokeName"><small >{this.props.pokeOrder} </small>{this.props.pokeName}</h1>
               <hr/>
-              <img alt={this.props.pokePicFront} src={this.props.pokePicFront}/>
-              <img alt={this.props.pokePicBack} src={this.props.pokePicBack}/>
-              <img alt={this.props.pokePicShiny} src={this.props.pokePicShiny}/>
+              <div className="flex">
+              <div className="margin-auto">
+                <img alt={this.props.pokePicFront} src={this.props.pokePicFront}/>
+                <p>Front</p>
+              </div>
+              <div className="margin-auto">
+                <img alt={this.props.pokePicBack} src={this.props.pokePicBack}/>
+                <p>back</p>
+              </div>
+              <div className="margin-auto">
+                <img alt={this.props.pokePicShiny} src={this.props.pokePicShiny}/>
+                <p>shiny</p>
+              </div>
+              </div>
               <hr/>
               <p><b>Type/s</b></p>
               <p>
