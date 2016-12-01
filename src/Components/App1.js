@@ -12,7 +12,7 @@ export default React.createClass({
                 <img alt="pikachu" className="pikachu-gif" src={this.props.pictureSearch} />
                 <h1 className="searchPokemon">Search Pokemon</h1>
                 <form onSubmit={this.props.onSubmit}>
-                  <input type="text" className="textbux" value={this.props.value} onChange={this.props.onChange} />
+                  <input type="text" className="textbux" placeholder="enter name / ID" value={this.props.value} onChange={this.props.onChange} />
                   <br/>
                   <input type="submit" value="Submit" className="btn btn-default"/>
                 </form>
