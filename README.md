@@ -1,17 +1,17 @@
-react-pokemon
-npm install
-npm install superagent
+react-pokemon<br>
+npm install<br>
+npm install superagent<br>
 
-____
-sample-server
-https://github.com/zenners/sample-server
-npm install
-node app.js
+<br>
+sample-server<br>
+https://github.com/zenners/sample-server<br>
+npm install<br>
+node app.js<br>
 
-____
-react-pokemon
-npm start
-______________________________________________________________________________________________</3
+<br>
+react-pokemon<br>
+npm start<br>
+
 
 
 
