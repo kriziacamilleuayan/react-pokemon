@@ -1,12 +1,17 @@
-Pokemon Commentator with the use of ReactJS and Pokemon API
+react-pokemon<br>
+npm install<br>
+npm install superagent<br>
 
-notes:</br>
--searches pokemon names/id (use try catch)</br>
--after selecting pokemon => able to see the stats and hope to render sprites as well</br>
--can comment on that pokemon (file handling (read & write))</br>
+<br>
+sample-server<br>
+https://github.com/zenners/sample-server<br>
+npm install<br>
+node app.js<br>
 
+<br>
+react-pokemon<br>
+npm start<br>
 
-______________________________________________________________________________________________</3
 
 
 
