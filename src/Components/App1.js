@@ -23,5 +23,3 @@ export default React.createClass({
       )
   }
 })
-
-// hello
